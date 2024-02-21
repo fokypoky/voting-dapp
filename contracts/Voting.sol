@@ -2,19 +2,17 @@
 pragma solidity ^0.8.19;
 
 contract UserVoting {
-    struct Lot {
-        uint256 votesCount;
-        address[] voted;
-    }
-
-    struct VotingResult {
-        string lotTitle;
-        uint256 votesCount;
-    }
-
     address public owner;
 
-    mapping(string => Lot) public lots;
+    // lot title -> votes count
+    mapping(string => uint256) public lots;
+
+    // voted wallets
+    mapping (address => bool) public voted;
+
+    // for check lot existings for O(1) 
+    mapping (string => bool) public lotsExists;
+
     string[] public allLotsTitles;
 
     constructor(address _owner) {
@@ -22,111 +20,81 @@ contract UserVoting {
     }
 
     modifier onlyOwner {
-        require(msg.sender == owner, "");
+        require(msg.sender == owner, "Only owner can execute");
         _;
     }
 
-    modifier lotExists(string memory lotTitle) {
-        require(isLotExists(lotTitle), "This lot does not exists");
-        _;
+    function addLot(string memory title) public onlyOwner {
+        require(!lotsExists[title], "Lot already exists");
+
+        lotsExists[title] = true;
+        allLotsTitles.push(title);
+        lots[title] = 0;
     }
+    
+    function removeLot(string memory lotTitle) public onlyOwner {
+        require(lots[lotTitle] == 0, "Unable to delete a lot that has already been voted on");
+        require(lotsExists[lotTitle], "This lot does not exists");
 
-    function vote(string memory lotTitle) public lotExists(lotTitle) {
-        require(!isUserVoted(lotTitle, msg.sender), "User already voted");
-        
-        lots[lotTitle].voted.push(msg.sender);
-        lots[lotTitle].votesCount += 1;
-    }
+        lots[lotTitle] = 0;
+        lotsExists[lotTitle] = false;
 
-    function addLot(string memory lotTitle) public onlyOwner {
-        require(!isLotExists(lotTitle), "This lot already exists");
-
-        allLotsTitles.push(lotTitle);
-        lots[lotTitle] = Lot({
-            votesCount: 0,
-            voted: new address[](0)
-        });
-    }
-
-    function getResult() public view returns (VotingResult[] memory) {
-        VotingResult[] memory result = new VotingResult[](allLotsTitles.length);
-        for (uint256 i = 0; i < allLotsTitles.length; i++) {
-            result[i] = VotingResult({
-                lotTitle: allLotsTitles[i],
-                votesCount: lots[allLotsTitles[i]].votesCount
-            });
-        }
-        return result;
-    }
-
-    function isUserVoted(string memory lotTitle, address userAddress) private view returns(bool) {
-        Lot memory lot = lots[lotTitle];
-        for (uint256 i = 0; i < lot.voted.length; i++) {
-            if (lot.voted[i] == userAddress) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    function isLotExists(string memory lotTitle) private view returns(bool) {
         for (uint256 i = 0; i < allLotsTitles.length; i++) {
             if (keccak256(abi.encodePacked(allLotsTitles[i])) == keccak256(abi.encodePacked(lotTitle))) {
-                return true;
+                delete allLotsTitles[i];
             }
         }
+    }
 
-        return false;
+    function vote(string memory lotTitle) public {
+        require(!voted[msg.sender], "This wallet has already been voted on");
+        require(lotsExists[lotTitle], "This lot does not exists");
+
+        voted[msg.sender] = true;
+        lots[lotTitle] += 1;
+    }
+
+    function getAllLotsTitles() public view returns (string[] memory) {
+        return allLotsTitles;
+    }
+    
+    function getLotVotes(string memory lotTitle) public view returns (uint256) {
+        return lots[lotTitle];
     }
 }
 
 contract VotingApp {
-    struct Voting {
-        string title;
-        string description;
-        address contractAddress;
-    }
+    // wallet address -> voting title -> contract address
+    mapping (address => mapping (string => address)) votings;
+    mapping (address => string[]) public userVotingTitles;
 
-    address public owner;
-    mapping (address=>Voting[]) public userVotings;
-
-    constructor() {
-        owner = msg.sender;
-    }
-
-    modifier onlyOwner {
-        require(msg.sender == owner);
-        _;
-    }
-
-    function addVoting(string memory _title, string memory _description) public {
-        require(!isUserVotingExists(msg.sender, _title), "User already has a vote with this title");
+    function addVoting(string memory title) public {
+        require(!isVotingExists(msg.sender, title), "User already has a vote with this title");
 
         UserVoting userVoting = new UserVoting(msg.sender);
-        userVotings[msg.sender].push(Voting({
-            title: _title,
-            description: _description,
-            contractAddress: address(userVoting)
-        }));
-    }
-
-    function removeVoting() public {
-        delete userVotings[msg.sender];
-    }
-
-    function getUserVotings() public view returns (Voting[] memory) {
-        return userVotings[msg.sender];
-    }
-
-    function isUserVotingExists(address userAddress, string memory votingTitle) private view returns (bool) {
-        Voting[] memory _userVotings = userVotings[userAddress];
         
-        for (uint i = 0; i < _userVotings.length; i++) {
-            if (keccak256(abi.encodePacked(_userVotings[i].title)) == keccak256(abi.encodePacked(votingTitle))) {
-                return true;
+        votings[msg.sender][title] = address(userVoting);
+        userVotingTitles[msg.sender].push(title);
+    }
+
+    function removeVoting(string memory title) public {
+        votings[msg.sender][title] = address(0);
+        for (uint256 i = 0; i < userVotingTitles[msg.sender].length; i++) {
+            if (keccak256(abi.encodePacked(userVotingTitles[msg.sender][i])) == keccak256(abi.encodePacked(title))) {
+                delete userVotingTitles[msg.sender][i];
             }
         }
+    }
 
-        return false;
+    function getVoting(string memory title) public view returns(address) {
+        return votings[msg.sender][title];
+    }
+
+    function getUserVotingTitles() public view returns (string[] memory) {
+        return userVotingTitles[msg.sender];
+    }
+
+    function isVotingExists(address userAddress, string memory votingTitle) public view returns (bool) {
+        return votings[userAddress][votingTitle] != address(0);
     }
 }
