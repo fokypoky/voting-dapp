@@ -12,3 +12,29 @@ node_modules
 # solidity-coverage files
 /coverage
 /coverage.json
+
+# react
+/voting-dapp-client/node_modules
+/voting-dapp-client/README.md
+
+# dependencies
+/voting-dapp-client/node_modules
+/voting-dapp-client/.pnp
+/voting-dapp-client/.pnp.js
+
+# testing
+/voting-dapp-client/coverage
+
+# production
+/voting-dapp-client/build
+
+# misc
+/voting-dapp-client/.DS_Store
+/voting-dapp-client/.env.local
+/voting-dapp-client/.env.development.local
+/voting-dapp-client/.env.test.local
+/voting-dapp-client/.env.production.local
+
+/voting-dapp-client/npm-debug.log*
+/voting-dapp-client/yarn-debug.log*
+/voting-dapp-client/yarn-error.log*
