@@ -3,10 +3,9 @@ const { ethers } = require('hardhat');
 require('dotenv').config();
 
 async function main() {
-  const signers = await ethers.getSigners();
-  signers.forEach(signer => {
-    console.log(signer.getAddress());
-  })
+  const contractFactory = await ethers.getContractFactory('VotingApp');
+  const deployedContract = await contractFactory.deploy();
+  console.log(deployedContract.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
