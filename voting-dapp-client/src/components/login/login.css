@@ -1,0 +1,28 @@
+.login__grid {
+	height: 100vh;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+	gap: 10px;
+}
+
+.login__grid-item {
+	display: grid;
+	grid-column: 2;
+	grid-row: 2;
+	padding: 20px;
+	justify-items: center;
+	align-items: center;
+}
+
+.login__grid-btn {
+	width: 200px;
+	height: 80px;
+	border: none;
+	cursor: pointer;
+	font-weight: 700;
+	border-radius: 10px;
+	color: white;
+	background-color: rgb(72, 90, 194);
+	font-size: 13pt;
+}

@@ -1,7 +1,29 @@
-import './App.css';
+import React, { useEffect, useState } from 'react';
+
+import './styles/styles.css';
+import { ethers } from 'ethers';
+
+import Login from './components/login/Login';
+import Voting from './components/Voting';
+
 
 function App() {
-	return <div className='App'></div>;
+	const [provider, setProvider] = useState(null);
+	const [signer, setSigner] = useState(null);
+
+	useEffect(() => {
+		if (signer) {
+			console.log(signer.address);
+		}
+	}, [signer]);
+
+	return (
+		signer
+			?
+			<Voting provider={provider} signer={signer} />
+			:
+			<Login setProvider={setProvider} setSigner={setSigner} />
+	);
 }
 
 export default App;
