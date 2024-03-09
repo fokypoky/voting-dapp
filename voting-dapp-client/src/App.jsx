@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import './styles/styles.css';
-import { ethers } from 'ethers';
 
 import Login from './components/login/Login';
-import Voting from './components/Voting';
+import Voting from './components/voting/Voting';
 
 
 function App() {

@@ -1,0 +1,57 @@
+.voting__grid {
+    display: grid;
+    grid-template-columns: 70px auto;
+    gap: 5px;
+    height: 100vh;
+}
+
+.voting__grid-menu {
+    display: grid;
+    grid-column: 1;
+    background-color: rgb(44, 44, 44);
+    border-radius: 5px;
+}
+
+.voting__grid-item {
+    display: grid;
+    grid-column: 2;
+    border-radius: 5px;
+}
+
+.menu__flex {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+button {
+    height: 45px;
+    width: 45px;
+    background-size: cover;
+    object-fit: cover;
+    background-color: rgb(44, 44, 44);
+    border: none;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: rgb(66, 66, 66);
+}
+
+.menu__home-image-button {
+    background-image: url('../../../public/menu_items/home.png');
+}
+
+.menu__search-image-button {
+    background-image: url('../../../public/menu_items/search.png');
+}
+
+.menu__profile-image-button {
+    background-image: url('../../../public/menu_items/profile.png');
+}
+
+.menu__info-image-button {
+    background-image: url('../../../public/menu_items/info.png');
+}
