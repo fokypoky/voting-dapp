@@ -20,5 +20,6 @@
   margin-top: 12px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 30px;
 }
