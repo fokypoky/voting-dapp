@@ -1,0 +1,37 @@
+.voting-item-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 150px;
+  min-width: 150px;
+  border-radius: 8px;
+  -webkit-box-shadow: 4px 4px 15px 2px rgba(34, 60, 80, 0.09);
+  -moz-box-shadow: 4px 4px 15px 2px rgba(34, 60, 80, 0.09);
+  box-shadow: 4px 4px 15px 2px rgba(34, 60, 80, 0.2);
+  font-family: "Open Sans", sans-serif;
+  color: gray;
+}
+
+.contract-title {
+  font-weight: bold;
+  font-size: 12pt;
+}
+
+.contract-address-text {
+  font-size: 11pt;
+}
+
+.action-button {
+  background-color: rgb(42, 183, 147);
+  color: white;
+  width: 70%;
+  height: 20%;
+  border-radius: 5px;
+}
+
+.action-button:hover {
+  background-color: rgb(62, 196, 160);
+}
