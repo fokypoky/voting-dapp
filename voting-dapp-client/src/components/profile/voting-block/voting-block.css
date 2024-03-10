@@ -1,0 +1,48 @@
+.voting-block {
+  margin-top: 2px;
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.voting-block-header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px gray solid;
+  border-radius: 4px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.voting-block-header-back {
+  grid-column: 1;
+  display: flex;
+  justify-content: left;
+  margin-left: 10px;
+}
+
+.voting-block-header-back-button {
+  background-image: url('../../../../public/block-items/arrow.png');
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+}
+
+.voting-block-header-back-button:hover {
+  background-color: #efefef;
+}
+
+.voting-block-header-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+.voting-block-body {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

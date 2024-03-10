@@ -20,7 +20,9 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
   }
 
   const openVoting = (contract) => {
-    setSelectedBlock(<VotingBlock contract={contract} setSelectedBlock={setSelectedBlock}/>)
+    setSelectedBlock(<VotingBlock contract={contract} setSelectedBlock={setSelectedBlock}
+                                  signer={signer}
+                                  provider={provider}/>)
   }
 
   const removeVoting = async (contract) => {
