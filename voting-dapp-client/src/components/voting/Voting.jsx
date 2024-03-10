@@ -15,7 +15,8 @@ const Voting = ({ provider, signer }) => {
 					<button className='menu__home-image-button'
 									onClick={() => setSelectedBlock(<Home/>)}/>
 					<button className='menu__profile-image-button'
-							onClick={() => setSelectedBlock(<Profile signer={signer} provider={provider}/>)}/>
+							onClick={() => setSelectedBlock(<Profile signer={signer} provider={provider}
+																											 setSelectedBlock={setSelectedBlock}/>)}/>
 					<button className='menu__search-image-button' onClick={() => setSelectedBlock(Search)}/>
 					<button className='menu__info-image-button'
 							onClick={() => setSelectedBlock(Info)}/>

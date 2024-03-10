@@ -7,10 +7,12 @@ import votingItem from "./voting-item/VotingItem";
 import VotingItem from "./voting-item/VotingItem";
 import app from "../../App";
 import {render} from "react-dom";
+import VotingBlock from "./voting-block/VotingBlock";
 
-const Profile = ({ signer, provider }) => {
+const Profile = ({ signer, provider, setSelectedBlock }) => {
   const [userContracts, setUserContracts] = useState([]);
-  const [contractsBlock, setContractsBlock] = useState(<p>У вас нет голосований</p>)
+  const [contractsBlock, setContractsBlock] = useState(<p>У вас нет голосований</p>);
+
   const getAppContract = () => {
      return new ethers.Contract(
       VOTING_APP_CONTRACT_ADDRESS, VOTING_APP_CONTRACT_ABI, signer
@@ -18,11 +20,10 @@ const Profile = ({ signer, provider }) => {
   }
 
   const openVoting = (contract) => {
-    //  TODO: добавить открытие вкладки с голосованием
+    setSelectedBlock(<VotingBlock contract={contract} setSelectedBlock={setSelectedBlock}/>)
   }
 
   const removeVoting = async (contract) => {
-
   }
 
   const addVoting = (votingTitle) => {
