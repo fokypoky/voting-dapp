@@ -5,14 +5,48 @@ import { VOTING_APP_CONTRACT_ADDRESS, VOTING_APP_CONTRACT_ABI, USER_VOTING_CONTR
 import AddVoting from "./add_voting/AddVoting";
 import votingItem from "./voting-item/VotingItem";
 import VotingItem from "./voting-item/VotingItem";
+import app from "../../App";
+import {render} from "react-dom";
 
 const Profile = ({ signer, provider }) => {
   const [userContracts, setUserContracts] = useState([]);
-
+  const [contractsBlock, setContractsBlock] = useState(<p>У вас нет голосований</p>)
   const getAppContract = () => {
      return new ethers.Contract(
       VOTING_APP_CONTRACT_ADDRESS, VOTING_APP_CONTRACT_ABI, signer
     );
+  }
+
+  const openVoting = (contract) => {
+    //  TODO: добавить открытие вкладки с голосованием
+  }
+
+  const removeVoting = async (contract) => {
+
+  }
+
+  const addVoting = (votingTitle) => {
+    setTimeout( () => {
+      const add = async () => {
+        try {
+          const address = await getAppContract().getVoting(votingTitle);
+          const contract = {
+            title: votingTitle,
+            contract: new ethers.Contract(
+              address, VOTING_APP_CONTRACT_ABI, signer
+            )
+          }
+
+          const contracts = Array.from(userContracts);
+          contracts.push(contract);
+          setUserContracts(contracts);
+        } catch (e) {
+          console.log(e);
+        }
+      }
+
+      add();
+    }, 17000)
   }
 
   useEffect(() => {
@@ -40,11 +74,16 @@ const Profile = ({ signer, provider }) => {
     };
 
     init();
-  }, []);
+  });
 
-  const openVoting = (contract) => {
-    //  TODO: добавить открытие вкладки с голосованием
-  }
+  useEffect(() => {
+    console.log('render');
+    if(userContracts.length > 0) {
+      setContractsBlock(userContracts.map(contract => {
+        return <VotingItem contract={contract} openVoting={openVoting}/>
+      }));
+    }
+  }, [userContracts]);
 
   return (
     <div className='profile-block'>
@@ -52,16 +91,10 @@ const Profile = ({ signer, provider }) => {
         <p>Аккаунт: {signer.address}</p>
       </div>
       <div className='add-voting-block'>
-        <AddVoting/>
+        <AddVoting appContract={getAppContract()} addVoting={addVoting} signer={signer}/>
       </div>
       <div className='votings-container'>
-        {
-          userContracts.length > 0
-          ?
-          userContracts.map(contract => <VotingItem contract={contract} openVoting={openVoting}/>)
-          :
-          <p>У вас еще нет голосований</p>
-        }
+        {contractsBlock}
       </div>
     </div>
   );
