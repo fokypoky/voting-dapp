@@ -1,0 +1,23 @@
+.add-voting-block {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+
+.add-voting-button {
+  height: 30px;
+  width: 150px;
+  background-color: rgb(42, 183, 147);
+  color: white;
+}
+
+.add-voting-button:hover {
+  background-color: rgb(62, 196, 160);
+}
+
+.add-voting-input {
+  border: 2px rgb(62, 196, 160) solid;
+  height: 18px;
+  border-radius: 4px;
+}

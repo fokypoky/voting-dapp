@@ -28,8 +28,7 @@ const VotingItem = ({ contract, openVoting }) => {
 			</div>
 			<div className="contract-address-text">
 				{
-					// FIXME: последний символ не добавляется
-					`${contractAddress.slice(0, 5)}...${contractAddress.slice(-5, -1)}`
+					`${contractAddress.slice(0, 5)}...${contractAddress.slice(-5, contractAddress.length)}`
 				}
 			</div>
 			<button className='action-button' onClick={() => copyAddress()}>Копировать</button>

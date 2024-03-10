@@ -1,0 +1,24 @@
+.profile-block {
+  margin-left: 20px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.profile-header {
+  font-size: 16pt;
+  border-bottom: 1pt gray solid;
+  font-weight: bold;
+}
+
+.add-voting-block {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.votings-container {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+}
