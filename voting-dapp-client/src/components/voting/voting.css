@@ -9,7 +9,6 @@
     display: grid;
     grid-column: 1;
     background-color: rgb(44, 44, 44);
-    border-radius: 5px;
 }
 
 .voting__grid-item {
