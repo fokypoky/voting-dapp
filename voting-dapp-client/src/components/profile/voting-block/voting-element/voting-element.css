@@ -1,11 +1,85 @@
 .voting-element {
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 8% 4fr;
+  border-radius: 7px;
+  margin-top: 20px;
+  -webkit-box-shadow: 4px 4px 15px 2px rgba(34, 60, 80, 0.09);
+  -moz-box-shadow: 4px 4px 15px 2px rgba(34, 60, 80, 0.09);
+  box-shadow: 4px 4px 15px 2px rgba(34, 60, 80, 0.2);
+  font-family: "Open Sans", sans-serif;
 }
 
 .voting-element-header {
+  grid-row: 1;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  border-radius: 5px;
+  border-bottom: 1px #d2d2d2 solid;
+  min-height: 50px;
+}
+
+.voting-element-header-button {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.voting-element-action-button {
+  height: 80%;
+  width: 80%;
+  color: white;
+  border-radius: 10px;
+  align-content: center;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bold;
+}
+
+.voting-element-header-add-lot-button {
+  background-color: rgb(62, 196, 160);
+}
+
+.voting-element-header-add-lot-button:hover {
+  background-color: rgb(118, 194, 173);
+}
+
+.voting-element-header-rm-voting-button {
+  background-color: #f55252;
+}
+
+.voting-element-header-rm-voting-button:hover {
+  background-color: #ee6a6a;
+}
+
+.voting-element-empty-lots-block {
+  width: 100%;
+  height: 100%;
+  color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20pt;
+}
+
+/*.voting-table-container {*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  margin-top: 8px;*/
+/*  display: flex;*/
+/*  justify-items: center;*/
+/*}*/
+
+.voting-element-body {
+  margin: 50px 5px 5px;
+}
+
+.voting-table-rm-lot-button {
+  display: flex;
+  width: 30%;
+  height: 30px;
+  margin: 10px;
+  background-color: #f55252;
+  color: white;
 }
