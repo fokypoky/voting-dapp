@@ -61,6 +61,10 @@ contract UserVoting {
     function getLotVotes(string memory lotTitle) public view returns (uint256) {
         return lots[lotTitle];
     }
+
+    function isLotExists(string memory lotTitle) public view returns (bool) {
+        return lotsExists[lotTitle];
+    }
 }
 
 contract VotingApp {
