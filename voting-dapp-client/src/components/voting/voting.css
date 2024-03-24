@@ -1,7 +1,6 @@
 .voting__grid {
     display: grid;
     grid-template-columns: 70px auto;
-    gap: 5px;
     height: 100vh;
 }
 
