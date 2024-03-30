@@ -1,11 +1,9 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
-import {ethers} from "ethers";
 
-import { USER_VOTING_CONTRACT_ABI } from '../../../constants/constants'
 
-import './add-voting.css';
 import 'react-toastify/dist/ReactToastify.css';
+import './add-voting.css';
 
 const AddVoting = ({ appContract, addVoting, signer }) => {
 	const [votingTitle, setVotingTitle] = useState('');
@@ -31,6 +29,7 @@ const AddVoting = ({ appContract, addVoting, signer }) => {
 			});
 		} catch (e) {
 			toast.error('Ошибка выполнения транзакции');
+			console.error(e);
 		}
 	}
 
@@ -39,7 +38,7 @@ const AddVoting = ({ appContract, addVoting, signer }) => {
 			<div>Название: </div>
 			<div>
 				<input type='text' value={votingTitle}
-							 onChange={e => setVotingTitle(e.target.value)}
+							 onChange={e => setVotingTitle(e?.target.value)}
 							 className='add-voting-input'/>
 			</div>
 			<div>

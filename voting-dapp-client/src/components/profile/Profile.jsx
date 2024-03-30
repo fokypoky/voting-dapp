@@ -1,13 +1,10 @@
-import React, {useEffect, useState} from 'react';
-import {ethers} from "ethers";
-import './profile.css';
-import { VOTING_APP_CONTRACT_ADDRESS, VOTING_APP_CONTRACT_ABI, USER_VOTING_CONTRACT_ABI } from '../../constants/constants'
+import { ethers } from "ethers";
+import React, { useEffect, useState } from 'react';
+import { USER_VOTING_CONTRACT_ABI, VOTING_APP_CONTRACT_ABI, VOTING_APP_CONTRACT_ADDRESS } from '../../constants/constants';
 import AddVoting from "./add_voting/AddVoting";
-import votingItem from "./voting-item/VotingItem";
-import VotingItem from "./voting-item/VotingItem";
-import app from "../../App";
-import {render} from "react-dom";
+import './profile.css';
 import VotingBlock from "./voting-block/VotingBlock";
+import VotingItem from "./voting-item/VotingItem";
 
 const Profile = ({ signer, provider, setSelectedBlock }) => {
   const [userContracts, setUserContracts] = useState([]);
@@ -23,9 +20,6 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
     setSelectedBlock(<VotingBlock contract={contract} setSelectedBlock={setSelectedBlock}
                                   signer={signer}
                                   provider={provider}/>)
-  }
-
-  const removeVoting = async (contract) => {
   }
 
   const addVoting = (votingTitle) => {
@@ -77,7 +71,7 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
     };
 
     init();
-  });
+  }, []);
 
   useEffect(() => {
     console.log('render');
