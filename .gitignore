@@ -38,3 +38,4 @@ node_modules
 /voting-dapp-client/npm-debug.log*
 /voting-dapp-client/yarn-debug.log*
 /voting-dapp-client/yarn-error.log*
+/build
