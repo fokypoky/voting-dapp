@@ -107,7 +107,7 @@ const VOTING_APP_CONTRACT_ABI = [
 	}
 ]
 
-const VOTING_APP_CONTRACT_ADDRESS = "0x11366139f8692bBb390f26A373fa65bbC82df46E";
+const VOTING_APP_CONTRACT_ADDRESS = "0xB0B0aDeECB03262B9f474d303D9b4B2e6b7FE7DA";
 const USER_VOTING_CONTRACT_ABI = [
 	{
 		"inputs": [
@@ -123,19 +123,6 @@ const USER_VOTING_CONTRACT_ABI = [
 	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "title",
-				"type": "string"
-			}
-		],
-		"name": "addLot",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
@@ -147,57 +134,6 @@ const USER_VOTING_CONTRACT_ABI = [
 				"internalType": "string",
 				"name": "",
 				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getAllLotsTitles",
-		"outputs": [
-			{
-				"internalType": "string[]",
-				"name": "",
-				"type": "string[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "lotTitle",
-				"type": "string"
-			}
-		],
-		"name": "getLotVotes",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "lotTitle",
-				"type": "string"
-			}
-		],
-		"name": "isLotExists",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -257,6 +193,38 @@ const USER_VOTING_CONTRACT_ABI = [
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "voted",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "title",
+				"type": "string"
+			}
+		],
+		"name": "addLot",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "string",
 				"name": "lotTitle",
 				"type": "string"
@@ -281,14 +249,46 @@ const USER_VOTING_CONTRACT_ABI = [
 		"type": "function"
 	},
 	{
-		"inputs": [
+		"inputs": [],
+		"name": "getAllLotsTitles",
+		"outputs": [
 			{
-				"internalType": "address",
+				"internalType": "string[]",
 				"name": "",
-				"type": "address"
+				"type": "string[]"
 			}
 		],
-		"name": "voted",
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "lotTitle",
+				"type": "string"
+			}
+		],
+		"name": "getLotVotes",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "lotTitle",
+				"type": "string"
+			}
+		],
+		"name": "isLotExists",
 		"outputs": [
 			{
 				"internalType": "bool",
@@ -299,5 +299,6 @@ const USER_VOTING_CONTRACT_ABI = [
 		"stateMutability": "view",
 		"type": "function"
 	}
-]
+] 
+
 export { USER_VOTING_CONTRACT_ABI, VOTING_APP_CONTRACT_ABI, VOTING_APP_CONTRACT_ADDRESS };

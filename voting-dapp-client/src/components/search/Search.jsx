@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {ethers} from "ethers";
+import { ethers } from "ethers";
+import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
-import { USER_VOTING_CONTRACT_ABI } from '../../constants/constants'
+import { USER_VOTING_CONTRACT_ABI } from '../../constants/constants';
 
 import './search.css';
 
@@ -13,9 +13,24 @@ const Search = ({ signer }) => {
   const [votingBlock, setVotingBlock] = useState(null);
 
   const vote = async (lot) => {
-    // TODO: сделать проверку проголосовал ли человек
+    console.log(lots.indexOf(lot));
     try {
+      const isVoted = await contract.voted(signer.address);
+      
+      if(isVoted) {
+        toast.error('Вы уже голосовали', {autoClose: 5000});
+        return;
+      }
+      
+      await contract.vote(lot.title);
 
+      toast.info('Подождите пока транзакция добавится в сеть блокчейн', {autoClose: 20000})
+      setTimeout(() => {
+        const _lots = Array.from(lots);
+
+        _lots.at(_lots.indexOf(lot)).votesCount += 1;
+        setLots(_lots);
+      }, 20000);
     } catch (e) {
       toast.error('Ошибка выполнения запроса');
       console.error(e);
@@ -23,6 +38,7 @@ const Search = ({ signer }) => {
   }
 
   const searchContract = async () => {
+    setLots([]);
     if (!contractAddress) {
       toast.error('Введите адрес голосования');
       return;
@@ -138,7 +154,12 @@ const Search = ({ signer }) => {
         <input className='search-block-input'
                value={contractAddress}
                onChange={e => setContractAddress(e.target.value)}
-               placeholder='Адрес голосования'/>
+               placeholder='Адрес голосования'
+               onKeyPress={e => {
+                if (e.key === 'Enter') {
+                  searchContract();
+                }
+               }}/>
         <button className='search-block-button' onClick={() => searchContract()}>
           Поиск
         </button>
@@ -147,7 +168,7 @@ const Search = ({ signer }) => {
         {votingBlock}
       </div>
       <ToastContainer
-        position="top-center"
+        position="bottom-right"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
