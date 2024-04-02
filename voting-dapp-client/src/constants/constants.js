@@ -107,7 +107,7 @@ const VOTING_APP_CONTRACT_ABI = [
 	}
 ]
 
-const VOTING_APP_CONTRACT_ADDRESS = "0xB0B0aDeECB03262B9f474d303D9b4B2e6b7FE7DA";
+const VOTING_APP_CONTRACT_ADDRESS = "0x8B98fFd33638E965eC6f202F163B068a0436cc3B";
 const USER_VOTING_CONTRACT_ABI = [
 	{
 		"inputs": [
@@ -210,6 +210,32 @@ const USER_VOTING_CONTRACT_ABI = [
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "getIsActive",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "_isActive",
+				"type": "bool"
+			}
+		],
+		"name": "setIsActive",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "string",
@@ -299,6 +325,5 @@ const USER_VOTING_CONTRACT_ABI = [
 		"stateMutability": "view",
 		"type": "function"
 	}
-] 
-
+]
 export { USER_VOTING_CONTRACT_ABI, VOTING_APP_CONTRACT_ABI, VOTING_APP_CONTRACT_ADDRESS };

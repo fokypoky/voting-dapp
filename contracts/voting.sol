@@ -15,13 +15,24 @@ contract UserVoting {
 
     string[] public allLotsTitles;
 
+    bool private isActive;
+
     constructor(address _owner) {
         owner = _owner;
+        isActive = true;
     }
 
     modifier onlyOwner {
         require(msg.sender == owner, "Only owner can execute");
         _;
+    }
+
+    function getIsActive() public view returns(bool) {
+        return isActive;
+    }
+
+    function setIsActive(bool _isActive) public onlyOwner {
+        isActive = _isActive;
     }
 
     function addLot(string memory title) public onlyOwner {
