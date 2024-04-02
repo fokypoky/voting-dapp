@@ -38,8 +38,13 @@ const AddVoting = ({ appContract, addVoting, signer }) => {
 			<div>Название: </div>
 			<div>
 				<input type='text' value={votingTitle}
-							 onChange={e => setVotingTitle(e?.target.value)}
-							 className='add-voting-input'/>
+							onChange={e => setVotingTitle(e?.target.value)}
+							className='add-voting-input'
+							onKeyPress={e => {
+								if(e.key === 'Enter') {
+									createVoting();
+								}
+							}}/>
 			</div>
 			<div>
 				<button className='add-voting-button' onClick={createVoting}>Добавить</button>
