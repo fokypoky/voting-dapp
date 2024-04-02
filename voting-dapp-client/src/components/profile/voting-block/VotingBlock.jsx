@@ -10,7 +10,7 @@ const VotingBlock = ({ contract, setSelectedBlock, signer, provider }) => {
 				<div className='voting-block-header-back'>
 					<button className='voting-block-header-back-button' onClick={() => setSelectedBlock(
 						<Profile signer={signer} provider={provider}
-										 setSelectedBlock={setSelectedBlock}/>)
+										setSelectedBlock={setSelectedBlock}/>)
 					}/>
 				</div>
 				<div className='voting-block-header-title'>

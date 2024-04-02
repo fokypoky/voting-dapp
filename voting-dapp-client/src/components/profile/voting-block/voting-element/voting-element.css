@@ -37,6 +37,7 @@
 
 .voting-element-header-add-lot-button {
   background-color: rgb(62, 196, 160);
+  cursor: pointer;
 }
 
 .voting-element-header-add-lot-button:hover {
@@ -44,11 +45,12 @@
 }
 
 .voting-element-header-rm-voting-button {
-  background-color: #f55252;
+  background-color: #424242;
+  cursor: pointer;
 }
 
 .voting-element-header-rm-voting-button:hover {
-  background-color: #ee6a6a;
+  background-color: #585858;
 }
 
 .voting-element-empty-lots-block {
@@ -105,10 +107,12 @@
   width: 70%;
   height: 70%;
   font-size: 12pt;
+  font-weight: 700;
   color: white;
-  background-color: #f55252;
+  background-color: #3A085F;
+  cursor: pointer;
 }
 
 .voting-element-lots-table-rm-button:hover {
-  background-color: #ee6a6a;
+  background-color: #4B1E79;
 }

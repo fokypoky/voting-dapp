@@ -32,6 +32,7 @@ button {
     background-color: rgb(44, 44, 44);
     border: none;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 button:hover {

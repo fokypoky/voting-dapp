@@ -30,6 +30,7 @@
   background-color: transparent;
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
 
 .voting-block-header-back-button:hover {

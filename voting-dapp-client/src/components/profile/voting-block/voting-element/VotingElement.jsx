@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import { ethers } from "ethers";
+import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from "react-toastify";
-import './voting-element.css';
-import {ethers} from "ethers";
 import { VOTING_APP_CONTRACT_ABI, VOTING_APP_CONTRACT_ADDRESS } from '../../../../constants/constants';
+import './voting-element.css';
 
 const VotingElement = ({ contract }) => {
 	const [lots, setLots] = useState([]);
@@ -169,7 +169,7 @@ const VotingElement = ({ contract }) => {
 				{lotComponents}
 			</div>
 			<ToastContainer
-				position="top-center"
+				position="bottom-right"
 				autoClose={5000}
 				hideProgressBar={false}
 				newestOnTop={false}

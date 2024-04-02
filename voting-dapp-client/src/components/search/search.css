@@ -43,14 +43,15 @@
 .vote-button {
   width: 70%;
   height: 30px;
-  background-color: #484848;
+  background-color: #3A085F;
+  font-weight: 700;
   color: white;
   font-family: "Open Sans", sans-serif;
   font-size: 11pt;
   cursor: pointer;
 }
 .vote-button:hover {
-  background-color: #676666;
+  background-color: #4B1E79;
 }
 
 .empty-lots-block {
