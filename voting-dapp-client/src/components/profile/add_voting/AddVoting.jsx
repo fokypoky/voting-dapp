@@ -50,7 +50,7 @@ const AddVoting = ({ appContract, addVoting, signer }) => {
 				<button className='add-voting-button' onClick={createVoting}>Добавить</button>
 			</div>
 			<ToastContainer
-				position="top-center"
+				position="bottom-right"
 				autoClose={3000}
 				hideProgressBar={false}
 				newestOnTop={false}
