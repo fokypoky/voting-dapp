@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import './voting.css';
-import Profile from "../profile/Profile";
-import Search from "../search/Search";
+import React, { useState } from 'react';
 import Home from "../home/Home";
 import Info from "../info/Info";
+import Profile from "../profile/Profile";
+import Search from "../search/Search";
+import './voting.css';
 
 const Voting = ({ provider, signer }) => {
 	const [selectedBlock, setSelectedBlock] = useState(null);
@@ -16,7 +16,7 @@ const Voting = ({ provider, signer }) => {
 									onClick={() => setSelectedBlock(<Home/>)}/>
 					<button className='menu__profile-image-button'
 							onClick={() => setSelectedBlock(<Profile signer={signer} provider={provider}
-																											 setSelectedBlock={setSelectedBlock}/>)}/>
+																											setSelectedBlock={setSelectedBlock}/>)}/>
 					<button className='menu__search-image-button' onClick={() => setSelectedBlock(
 						<Search signer={signer}/>)}/>
 					<button className='menu__info-image-button'

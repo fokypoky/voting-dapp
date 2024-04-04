@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { USER_VOTING_CONTRACT_ABI, VOTING_APP_CONTRACT_ABI, VOTING_APP_CONTRACT_ADDRESS } from '../../constants/constants';
 import AddVoting from "./add_voting/AddVoting";
 import './profile.css';
@@ -11,7 +12,7 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
   const [contractsBlock, setContractsBlock] = useState(<p>У вас нет голосований</p>);
 
   const getAppContract = () => {
-     return new ethers.Contract(
+    return new ethers.Contract(
       VOTING_APP_CONTRACT_ADDRESS, VOTING_APP_CONTRACT_ABI, signer
     );
   }
@@ -46,27 +47,41 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
     }, 17000)
   }
 
+  const getUserContracts = async (appContract) => {
+    const userVotingTitles = await appContract.getUserVotingTitles();
+    const userContracts = [];
+
+    for (const votingTitle of userVotingTitles) {
+      if (votingTitle === '') {
+        continue;
+      }
+
+      const contractAddress = await appContract.getVoting(votingTitle);
+      userContracts.push({
+        title: votingTitle,
+        contract: new ethers.Contract(
+          contractAddress, USER_VOTING_CONTRACT_ABI, signer
+        )
+      });
+    }
+
+    return userContracts;
+  }
+
+  const refreshVotings = async () => {
+    try {
+      const userContracts = await getUserContracts(getAppContract());
+      setUserContracts(userContracts);
+    } catch (e) {
+      toast.error('Ошибка подключения к сети блокчейн');
+      console.error(e);
+    }
+  }
+
   useEffect(() => {
     const init = async () => {
       const appContract = getAppContract();
-      const userVotingTitles = await appContract.getUserVotingTitles();
-
-      const userContracts = [];
-
-      for(const votingTitle of userVotingTitles) {
-        if(votingTitle === '') {
-          continue;
-        }
-
-        const contractAddress = await appContract.getVoting(votingTitle);
-        userContracts.push({
-          title: votingTitle,
-          contract: new ethers.Contract(
-            contractAddress, USER_VOTING_CONTRACT_ABI, signer
-          )
-        });
-      }
-
+      const userContracts = await getUserContracts(appContract);
       setUserContracts(userContracts);
     };
 
@@ -89,6 +104,7 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
       </div>
       <div className='add-voting-block'>
         <AddVoting appContract={getAppContract()} addVoting={addVoting} signer={signer}/>
+        <button className='add-voting-block-refresh-button' onClick={refreshVotings}/>
       </div>
       <div className='votings-container'>
         {contractsBlock}

@@ -1,13 +1,14 @@
 .add-voting-block {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 10px;
   align-items: center;
 }
 
 .add-voting-button {
   height: 30px;
   width: 150px;
+  margin-right: 0;
   background-color: rgb(42, 183, 147);
   color: white;
 }
