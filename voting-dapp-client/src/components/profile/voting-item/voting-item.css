@@ -15,9 +15,15 @@
   color: gray;
 }
 
-.contract-title {
+.available-contract-title {
   font-weight: bold;
   font-size: 12pt;
+}
+
+.closed-contract-title {
+  font-weight: bold;
+  font-size: 12pt;
+  color: rgb(255, 61, 61);
 }
 
 .contract-address-text {

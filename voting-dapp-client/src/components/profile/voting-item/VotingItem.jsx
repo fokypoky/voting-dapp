@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
-import './voting-item.css';
 import 'react-toastify/dist/ReactToastify.css';
+import './voting-item.css';
 
 const VotingItem = ({ contract, openVoting }) => {
 	const [contractTitle, setContractTitle] = useState(contract.title);
@@ -14,7 +14,7 @@ const VotingItem = ({ contract, openVoting }) => {
 		}
 
 		init();
-	})
+	}, [])
 
 	const copyAddress = () => {
 		navigator.clipboard.writeText(contractAddress);
@@ -23,9 +23,17 @@ const VotingItem = ({ contract, openVoting }) => {
 
 	return(
 		<div className='voting-item-container'>
-			<div className="contract-title">
-				{contractTitle}
-			</div>
+			{
+				contract.isActive
+				?
+				<div className="available-contract-title">
+					{contractTitle}
+				</div>
+				:
+				<div className='closed-contract-title'>
+					{contractTitle}
+				</div>
+			}
 			<div className="contract-address-text">
 				{
 					`${contractAddress.slice(0, 5)}...${contractAddress.slice(-5, contractAddress.length)}`
@@ -34,7 +42,7 @@ const VotingItem = ({ contract, openVoting }) => {
 			<button className='action-button' onClick={() => copyAddress()}>Копировать</button>
 			<button className='action-button' onClick={() => openVoting(contract)}>Открыть</button>
 			<ToastContainer
-				position="top-center"
+				position="bottom-right"
 				autoClose={1500}
 				hideProgressBar={false}
 				newestOnTop={false}

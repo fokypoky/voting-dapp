@@ -57,11 +57,16 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
       }
 
       const contractAddress = await appContract.getVoting(votingTitle);
+      const contract = new ethers.Contract(
+        contractAddress, USER_VOTING_CONTRACT_ABI, signer
+      );
+      
+      const isContractActive = await contract.getIsActive();
+      
       userContracts.push({
         title: votingTitle,
-        contract: new ethers.Contract(
-          contractAddress, USER_VOTING_CONTRACT_ABI, signer
-        )
+        contract: contract,
+        isActive: isContractActive
       });
     }
 
@@ -89,7 +94,6 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
   }, []);
 
   useEffect(() => {
-    console.log('render');
     if(userContracts.length > 0) {
       setContractsBlock(userContracts.map(contract => {
         return <VotingItem contract={contract} openVoting={openVoting}/>

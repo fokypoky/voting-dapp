@@ -1,7 +1,5 @@
-import { ethers } from "ethers";
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from "react-toastify";
-import { VOTING_APP_CONTRACT_ABI, VOTING_APP_CONTRACT_ADDRESS } from '../../../../constants/constants';
 import './voting-element.css';
 
 const VotingElement = ({ contract }) => {
@@ -58,16 +56,10 @@ const VotingElement = ({ contract }) => {
 		}
 	}
 
-	const deleteVoting = async () => {
+	const changeVotingStatus = async () => {
 		try {
-			const provider = new ethers.BrowserProvider(window.ethereum);
-			const signer = await provider.getSigner();
-
-			const appContract = new ethers.Contract(
-				VOTING_APP_CONTRACT_ADDRESS, VOTING_APP_CONTRACT_ABI, signer
-			);
-
-			await appContract.removeVoting(contract.title);
+			const status = await contract.contract.getIsActive();
+			await contract.contract.setIsActive(!status);
 			toast.info('Дождитесь подтверждения транзакции', { autoClose: 20000});
 		} catch (e) {
 			toast.error('Возникла ошибка во время работы с сетью блокчейн');
@@ -160,8 +152,8 @@ const VotingElement = ({ contract }) => {
 					</button>
 				</div>
 				<div className="voting-element-header-button">
-					<button className="voting-element-header-rm-voting-button voting-element-action-button"
-					onClick={() => deleteVoting()}>Удалить голосование
+					<button className="voting-element-header-add-lot-button voting-element-action-button"
+					onClick={() => changeVotingStatus()}>Закрыть/открыть голосование
 					</button>
 				</div>
 			</div>
