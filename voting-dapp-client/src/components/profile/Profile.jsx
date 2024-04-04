@@ -10,6 +10,7 @@ import VotingItem from "./voting-item/VotingItem";
 const Profile = ({ signer, provider, setSelectedBlock }) => {
   const [userContracts, setUserContracts] = useState([]);
   const [contractsBlock, setContractsBlock] = useState(<p>У вас нет голосований</p>);
+  let timeoutIds = [];
 
   const getAppContract = () => {
     return new ethers.Contract(
@@ -24,7 +25,7 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
   }
 
   const addVoting = (votingTitle) => {
-    setTimeout( () => {
+    const timeoutId = setTimeout( () => {
       const add = async () => {
         try {
           const address = await getAppContract().getVoting(votingTitle);
@@ -44,7 +45,9 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
       }
 
       add();
-    }, 17000)
+    }, 17000);
+
+    timeoutIds.push(timeoutId);
   }
 
   const getUserContracts = async (appContract) => {
@@ -62,7 +65,7 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
       );
       
       const isContractActive = await contract.getIsActive();
-      
+
       userContracts.push({
         title: votingTitle,
         contract: contract,
@@ -73,9 +76,15 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
     return userContracts;
   }
 
+  // FIXME: при обновлении, когда еще не завершился timeout, может возникнуть
+  // ошибка v.get()...
   const refreshVotings = async () => {
     try {
       const userContracts = await getUserContracts(getAppContract());
+      
+      timeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
+      timeoutIds = [];
+
       setUserContracts(userContracts);
     } catch (e) {
       toast.error('Ошибка подключения к сети блокчейн');
