@@ -4,6 +4,7 @@ import Info from "../info/Info";
 import Profile from "../profile/Profile";
 import Search from "../search/Search";
 import './voting.css';
+import Settings from '../settings/Settings';
 
 const Voting = ({ provider, signer }) => {
 	const [selectedBlock, setSelectedBlock] = useState(null);
@@ -13,14 +14,16 @@ const Voting = ({ provider, signer }) => {
 			<div className='voting__grid-menu'>
 				<div className='menu__flex'>
 					<button className='menu__home-image-button'
-									onClick={() => setSelectedBlock(<Home/>)}/>
+						onClick={() => setSelectedBlock(<Home />)} />
 					<button className='menu__profile-image-button'
-							onClick={() => setSelectedBlock(<Profile signer={signer} provider={provider}
-																											setSelectedBlock={setSelectedBlock}/>)}/>
+						onClick={() => setSelectedBlock(<Profile signer={signer} provider={provider}
+							setSelectedBlock={setSelectedBlock} />)} />
 					<button className='menu__search-image-button' onClick={() => setSelectedBlock(
-						<Search signer={signer}/>)}/>
+						<Search signer={signer} />)} />
 					<button className='menu__info-image-button'
-							onClick={() => setSelectedBlock(Info)}/>
+						onClick={() => setSelectedBlock(Info)} />
+					<button className='menu__settings-image-button'
+						onClick={() => setSelectedBlock(<Settings />)} />
 				</div>
 			</div>
 			<div className='voting__grid-item'>

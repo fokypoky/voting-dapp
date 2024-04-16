@@ -105,9 +105,9 @@ const VOTING_APP_CONTRACT_ABI = [
 		"stateMutability": "view",
 		"type": "function"
 	}
-]
+];
 
-const VOTING_APP_CONTRACT_ADDRESS = "0x8B98fFd33638E965eC6f202F163B068a0436cc3B";
+const VOTING_APP_CONTRACT_ADDRESS = "0x18d12FcC298832B91ABC76649540FFFED9622040";
 const USER_VOTING_CONTRACT_ABI = [
 	{
 		"inputs": [
@@ -325,5 +325,5 @@ const USER_VOTING_CONTRACT_ABI = [
 		"stateMutability": "view",
 		"type": "function"
 	}
-]
+];
 export { USER_VOTING_CONTRACT_ABI, VOTING_APP_CONTRACT_ABI, VOTING_APP_CONTRACT_ADDRESS };
