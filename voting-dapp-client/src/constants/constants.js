@@ -108,6 +108,7 @@ const VOTING_APP_CONTRACT_ABI = [
 ];
 
 const VOTING_APP_CONTRACT_ADDRESS = "0x18d12FcC298832B91ABC76649540FFFED9622040";
+
 const USER_VOTING_CONTRACT_ABI = [
 	{
 		"inputs": [
@@ -123,6 +124,19 @@ const USER_VOTING_CONTRACT_ABI = [
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "title",
+				"type": "string"
+			}
+		],
+		"name": "addLot",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
@@ -134,6 +148,38 @@ const USER_VOTING_CONTRACT_ABI = [
 				"internalType": "string",
 				"name": "",
 				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllLotsTitles",
+		"outputs": [
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "lotTitle",
+				"type": "string"
+			}
+		],
+		"name": "getLotVotes",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -193,64 +239,6 @@ const USER_VOTING_CONTRACT_ABI = [
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "voted",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getIsActive",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "bool",
-				"name": "_isActive",
-				"type": "bool"
-			}
-		],
-		"name": "setIsActive",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "title",
-				"type": "string"
-			}
-		],
-		"name": "addLot",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "string",
 				"name": "lotTitle",
 				"type": "string"
@@ -275,46 +263,14 @@ const USER_VOTING_CONTRACT_ABI = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "getAllLotsTitles",
-		"outputs": [
-			{
-				"internalType": "string[]",
-				"name": "",
-				"type": "string[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "lotTitle",
-				"type": "string"
-			}
-		],
-		"name": "getLotVotes",
-		"outputs": [
-			{
-				"internalType": "uint256",
+				"internalType": "address",
 				"name": "",
-				"type": "uint256"
+				"type": "address"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "lotTitle",
-				"type": "string"
-			}
-		],
-		"name": "isLotExists",
+		"name": "voted",
 		"outputs": [
 			{
 				"internalType": "bool",

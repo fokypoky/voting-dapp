@@ -2,6 +2,12 @@
 pragma solidity ^0.8.19;
 
 contract UserVoting {
+    struct Comment {
+        address commentatorAddress;
+        string text;
+        uint256 timestamp;
+    }
+
     address public owner;
 
     // lot title -> votes count
@@ -17,6 +23,8 @@ contract UserVoting {
 
     bool private isActive;
 
+    Comment[] public comments;
+
     constructor(address _owner) {
         owner = _owner;
         isActive = true;
@@ -25,6 +33,19 @@ contract UserVoting {
     modifier onlyOwner {
         require(msg.sender == owner, "Only owner can execute");
         _;
+    }  
+
+    modifier isVotingActive {
+        require(isActive, "Voting stopped");
+        _;
+    }
+
+    function addComment(string memory text) public isVotingActive {
+        comments.push(Comment(msg.sender, text, block.timestamp));
+    }
+
+    function getAllComments() public view returns (Comment[] memory) {
+        return comments;
     }
 
     function getIsActive() public view returns(bool) {
@@ -57,7 +78,7 @@ contract UserVoting {
         }
     }
 
-    function vote(string memory lotTitle) public {
+    function vote(string memory lotTitle) public isVotingActive{
         require(!voted[msg.sender], "This wallet has already been voted on");
         require(lotsExists[lotTitle], "This lot does not exists");
 
