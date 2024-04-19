@@ -12,8 +12,10 @@ const Comment = ({comment, isOwner}) => {
 				}
 				<div className='comment-header-date'>в {comment.date}</div>
 			</div>
-			<div>
-				{comment.text}
+			<div className='comment-body'>
+				<div className='comment-body-text'>
+					{comment.text}
+				</div>
 			</div>
 		</div>
 	)
