@@ -5,15 +5,19 @@ import { ToastContainer, toast } from 'react-toastify';
 import { USER_VOTING_CONTRACT_ABI } from '../../constants/constants';
 
 import './search.css';
+import AddComment from "./comments/AddComment";
+import Comment from './comments/Comment';
+import CommentsBlock from "./comments/CommentsBlock";
 
 const Search = ({ signer }) => {
   const [contractAddress, setContractAddress] = useState('');
   const [contract, setContract] = useState(null);
   const [lots, setLots] = useState([]);
   const [votingBlock, setVotingBlock] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [commentsBlock, setCommentsBlock] = useState(null);
 
   const vote = async (lot) => {
-    console.log(lots.indexOf(lot));
     try {
       const isVoted = await contract.voted(signer.address);
       
@@ -57,6 +61,13 @@ const Search = ({ signer }) => {
     }
   }
 
+  const onCommentAdded = async (comment) => {
+    const _comments = Array.from(comments);
+    _comments.push(comment);
+
+    toast.success('Комментарий добавлен');
+  }
+
   useEffect(() => {
     if (!contract) {
       return;
@@ -92,57 +103,62 @@ const Search = ({ signer }) => {
   useEffect(() => {
     if (lots.count > 0 || contract ) {
       setVotingBlock(
-        <table className='voting-element-lots-table'>
-          <thead>
-          <tr>
-            <th>№</th>
-            <th>Название</th>
-            <th>Количество голосов</th>
-            <th>Действие</th>
-          </tr>
-          </thead>
-          <tbody>
-          {
-            lots.length === 0
-            ?
-            <tr>
-              <td colSpan='4'>
-                <div className="empty-lots-block voting-element-lots-table-item">Нет кандидатов</div>
-              </td>
-            </tr>
-            :
-            lots.map((lot, index) => {
-              return (
+        <div>
+          <div>
+            <table className='voting-element-lots-table'>
+              <thead>
+              <tr>
+                <th>№</th>
+                <th>Название</th>
+                <th>Количество голосов</th>
+                <th>Действие</th>
+              </tr>
+              </thead>
+              <tbody>
+              {
+                lots.length === 0
+                ?
                 <tr>
-                  <td>
-                    <div className="voting-element-lots-table-item">
-                      { index + 1 }
-                    </div>
-                  </td>
-                  <td>
-                    <div className="voting-element-lots-table-item">
-                      { lot.title }
-                    </div>
-                  </td>
-                  <td>
-                    <div className="voting-element-lots-table-item">
-                      { lot.votesCount }
-                    </div>
-                  </td>
-                  <td>
-                    <div className="voting-element-lots-table-item">
-                      <button className='vote-button'
-                        onClick={() => vote(lot)}>
-                        Проголосовать
-                      </button>
-                    </div>
+                  <td colSpan='4'>
+                    <div className="empty-lots-block voting-element-lots-table-item">Нет кандидатов</div>
                   </td>
                 </tr>
-              )
-            })
-          }
-          </tbody>
-        </table>
+                :
+                lots.map((lot, index) => {
+                  return (
+                    <tr>
+                      <td>
+                        <div className="voting-element-lots-table-item">
+                          { index + 1 }
+                        </div>
+                      </td>
+                      <td>
+                        <div className="voting-element-lots-table-item">
+                          { lot.title }
+                        </div>
+                      </td>
+                      <td>
+                        <div className="voting-element-lots-table-item">
+                          { lot.votesCount }
+                        </div>
+                      </td>
+                      <td>
+                        <div className="voting-element-lots-table-item">
+                          <button className='vote-button'
+                            onClick={() => vote(lot)}>
+                            Проголосовать
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  )
+                })
+              }
+              </tbody>
+            </table>
+          </div>
+          <CommentsBlock contract={contract}/>
+        </div>
       );
     }
 
@@ -152,14 +168,14 @@ const Search = ({ signer }) => {
     <div className='search'>
       <div className='search-block'>
         <input className='search-block-input'
-               value={contractAddress}
-               onChange={e => setContractAddress(e.target.value)}
-               placeholder='Адрес голосования'
-               onKeyPress={e => {
+              value={contractAddress}
+              onChange={e => setContractAddress(e.target.value)}
+              placeholder='Адрес голосования'
+              onKeyPress={e => {
                 if (e.key === 'Enter') {
                   searchContract();
                 }
-               }}/>
+              }}/>
         <button className='search-block-button' onClick={() => searchContract()}>
           Поиск
         </button>

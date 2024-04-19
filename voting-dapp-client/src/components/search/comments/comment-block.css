@@ -1,0 +1,54 @@
+.comment-block {
+  height: fit-content;
+  margin: 30px 10px 10px 10px;
+  border-radius: 7px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  -webkit-box-shadow: 5px 5px 23px -6px rgba(0,0,0,0.86);
+  box-shadow: 5px 5px 23px -6px rgba(0,0,0,0.3);
+}
+
+.comment-block-header {
+  min-height: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16pt;
+  font-weight: bold;
+  color: #444444;
+}
+
+.refresh-comments-button {
+  background-color: transparent;
+  background-image: url('../../../../public/refresh.png');
+  height: 25px;
+  width: 25px;
+  margin-left: 8px;
+}
+
+.refresh-comments-button:hover {
+  background-color: #eaeaea;
+}
+
+.comments-body {
+  margin-bottom: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-items: center;
+  align-content: center;
+}
+
+.empty-comments {
+  width: 100%;
+  font-size: 15pt;
+  font-weight: bold;
+  color: gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

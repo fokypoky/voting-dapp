@@ -1,0 +1,31 @@
+.comment-block-add-comment {
+  width: 100%;
+  min-height: 35px;
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  align-content: center;
+  flex-wrap: nowrap;
+}
+
+.add-comment-button {
+  width: 100px;
+  height: 25px;
+  background-color: rgb(42, 183, 147);
+  color: white;
+  margin-left: 20px;
+  font-size: 12.5pt;
+}
+
+.add-comment-button:hover {
+  background-color: rgb(62, 196, 160);
+}
+
+.add-comment-input {
+  height: 20px;
+  width: 100%;
+  margin-right: 12px;
+  border-radius: 5px;
+  border: 1px #c7c7c7 solid;
+  font-size: 12.5pt;
+}

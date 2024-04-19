@@ -1,0 +1,29 @@
+.comment {
+  width: 100%;
+  border: 1px #c7c7c7 solid;
+  border-radius: 5px;
+}
+
+.comment-header {
+  background-color: #24b48d;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  color: white;
+  font-size: 13pt;
+  display: flex;
+  flex-direction: row;
+  padding: 3px 0 3px 3px;
+}
+
+.comment-header-owner-address {
+  color: #9233ff;
+  font-weight: bold;
+}
+
+.comment-header-user-address {
+  color: white;
+}
+
+.comment-header-date {
+  margin-left: 5px;
+}
