@@ -12,16 +12,21 @@
   font-size: 13pt;
   display: flex;
   flex-direction: row;
+  align-items: center;
   padding: 3px 0 3px 3px;
   font-weight: bold;
 }
 
 .comment-header-owner-address {
-  color: #9233ff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.comment-header-user-address {
-  color: white;
+.comment-header-owner-icon {
+  margin-top: 5px;
+  margin-left: 5px;
+  margin-right: 3px;
 }
 
 .comment-header-date {
