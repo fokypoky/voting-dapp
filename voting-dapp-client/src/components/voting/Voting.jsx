@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Home from "../home/Home";
 import Info from "../info/Info";
 import Profile from "../profile/Profile";
@@ -7,7 +7,14 @@ import './voting.css';
 import Settings from '../settings/Settings';
 
 const Voting = ({ provider, signer }) => {
-	const [selectedBlock, setSelectedBlock] = useState(null);
+	const [selectedBlock, setSelectedBlock] = useState(<Home/>);
+	const [currentSigner, setCurrentSigner] = useState(signer);
+
+	window.ethereum.on('accountsChanged', async () => {
+		const _signer = await provider.getSigner();
+		setSelectedBlock(<Home/>);
+		setCurrentSigner(_signer);
+	});
 
 	return (
 		<div className='voting__grid'>
@@ -16,10 +23,10 @@ const Voting = ({ provider, signer }) => {
 					<button className='menu__home-image-button'
 						onClick={() => setSelectedBlock(<Home />)} />
 					<button className='menu__profile-image-button'
-						onClick={() => setSelectedBlock(<Profile signer={signer} provider={provider}
+						onClick={() => setSelectedBlock(<Profile signer={currentSigner} provider={provider}
 							setSelectedBlock={setSelectedBlock} />)} />
 					<button className='menu__search-image-button' onClick={() => setSelectedBlock(
-						<Search signer={signer} />)} />
+						<Search signer={currentSigner} />)} />
 					<button className='menu__info-image-button'
 						onClick={() => setSelectedBlock(Info)} />
 					<button className='menu__settings-image-button'
