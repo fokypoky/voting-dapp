@@ -5,8 +5,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import { USER_VOTING_CONTRACT_ABI } from '../../constants/constants';
 
 import './search.css';
-import AddComment from "./comments/AddComment";
-import Comment from './comments/Comment';
 import CommentsBlock from "./comments/CommentsBlock";
 
 const Search = ({ signer }) => {
@@ -14,8 +12,6 @@ const Search = ({ signer }) => {
   const [contract, setContract] = useState(null);
   const [lots, setLots] = useState([]);
   const [votingBlock, setVotingBlock] = useState(null);
-  const [comments, setComments] = useState([]);
-  const [commentsBlock, setCommentsBlock] = useState(null);
 
   const vote = async (lot) => {
     try {
@@ -59,13 +55,6 @@ const Search = ({ signer }) => {
       toast.error('Во время выполнения запроса возникла ошибка');
       console.error(e);
     }
-  }
-
-  const onCommentAdded = async (comment) => {
-    const _comments = Array.from(comments);
-    _comments.push(comment);
-
-    toast.success('Комментарий добавлен');
   }
 
   useEffect(() => {
