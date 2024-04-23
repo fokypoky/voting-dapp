@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import './styles/styles.css';
 
 import Login from './components/login/Login';
-import Voting from './components/voting/Voting';
+import Menu from './components/menu/Menu';
 
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
 	return (
 		signer
 			?
-			<Voting provider={provider} signer={signer} />
+			<Menu provider={provider} signer={signer} />
 			:
 			<Login setProvider={setProvider} setSigner={setSigner} />
 	);

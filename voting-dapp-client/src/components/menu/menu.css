@@ -69,12 +69,3 @@ button {
 .menu__info-image-button:hover {
     background-color: rgb(66, 66, 66);
 }
-
-.menu__settings-image-button {
-    background-color: rgb(44, 44, 44);
-    background-image: url('../../../public/menu_items/settings.png');
-}
-
-.menu__settings-image-button:hover {
-    background-color: rgb(66, 66, 66);
-}

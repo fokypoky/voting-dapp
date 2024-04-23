@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Home from "../home/Home";
 import Info from "../info/Info";
 import Profile from "../profile/Profile";
 import Search from "../search/Search";
-import './voting.css';
-import Settings from '../settings/Settings';
+import './menu.css';
 
-const Voting = ({ provider, signer }) => {
+const Menu = ({ provider, signer }) => {
 	const [selectedBlock, setSelectedBlock] = useState(<Home/>);
 	const [currentSigner, setCurrentSigner] = useState(signer);
 
@@ -29,8 +28,6 @@ const Voting = ({ provider, signer }) => {
 						<Search signer={currentSigner} />)} />
 					<button className='menu__info-image-button'
 						onClick={() => setSelectedBlock(Info)} />
-					<button className='menu__settings-image-button'
-						onClick={() => setSelectedBlock(<Settings />)} />
 				</div>
 			</div>
 			<div className='voting__grid-item'>
@@ -40,4 +37,4 @@ const Voting = ({ provider, signer }) => {
 	);
 };
 
-export default Voting;
+export default Menu;

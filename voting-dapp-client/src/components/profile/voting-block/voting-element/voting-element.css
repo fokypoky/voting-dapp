@@ -109,10 +109,10 @@
   font-size: 12pt;
   font-weight: 700;
   color: white;
-  background-color: #3A085F;
+  background-color: #ff8f67;
   cursor: pointer;
 }
 
 .voting-element-lots-table-rm-button:hover {
-  background-color: #4B1E79;
+  background-color: #ffa080;
 }
