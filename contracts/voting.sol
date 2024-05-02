@@ -100,7 +100,7 @@ contract UserVoting {
 }
 
 contract VotingApp {
-    // wallet address -> voting title -> contract address
+    // wallet address -> menu title -> contract address
     mapping (address => mapping (string => address)) votings;
     mapping (address => string[]) public userVotingTitles;
 

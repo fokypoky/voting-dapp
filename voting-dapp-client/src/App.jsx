@@ -10,12 +10,6 @@ function App() {
 	const [provider, setProvider] = useState(null);
 	const [signer, setSigner] = useState(null);
 
-	useEffect(() => {
-		if (signer) {
-			console.log(signer.address);
-		}
-	}, [signer]);
-
 	return (
 		signer
 			?

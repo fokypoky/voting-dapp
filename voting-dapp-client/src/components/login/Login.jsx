@@ -16,7 +16,10 @@ const Login = ({ setProvider, setSigner }) => {
 
 		try {
 			const provider = new ethers.BrowserProvider(window.ethereum);
+			console.log(provider);
+
 			const signer = await provider.getSigner();
+			console.log(signer);
 
 			setProvider(provider);
 			setSigner(signer);
