@@ -10,7 +10,6 @@ import VotingItem from "./voting-item/VotingItem";
 const Profile = ({ signer, provider, setSelectedBlock }) => {
   const [userContracts, setUserContracts] = useState([]);
   const [contractsBlock, setContractsBlock] = useState(<p>У вас нет голосований</p>);
-  let timeoutIds = [];
 
   const getAppContract = () => {
     return new ethers.Contract(
@@ -22,32 +21,6 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
     setSelectedBlock(<VotingBlock contract={contract} setSelectedBlock={setSelectedBlock}
                                   signer={signer}
                                   provider={provider}/>)
-  }
-
-  const addVoting = (votingTitle) => {
-    const timeoutId = setTimeout( () => {
-      const add = async () => {
-        try {
-          const address = await getAppContract().getVoting(votingTitle);
-          const contract = {
-            title: votingTitle,
-            contract: new ethers.Contract(
-              address, VOTING_APP_CONTRACT_ABI, signer
-            )
-          }
-
-          const contracts = Array.from(userContracts);
-          contracts.push(contract);
-          setUserContracts(contracts);
-        } catch (e) {
-          console.log(e);
-        }
-      }
-
-      add();
-    }, 17000);
-
-    timeoutIds.push(timeoutId);
   }
 
   const getUserContracts = async (appContract) => {
@@ -76,15 +49,9 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
     return userContracts;
   }
 
-  // FIXME: при обновлении, когда еще не завершился timeout, может возникнуть
-  // ошибка v.get()...
   const refreshVotings = async () => {
     try {
       const userContracts = await getUserContracts(getAppContract());
-      
-      timeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
-      timeoutIds = [];
-
       setUserContracts(userContracts);
     } catch (e) {
       toast.error('Ошибка подключения к сети блокчейн');
@@ -116,7 +83,7 @@ const Profile = ({ signer, provider, setSelectedBlock }) => {
         <p>Аккаунт: {signer.address}</p>
       </div>
       <div className='add-voting-block'>
-        <AddVoting appContract={getAppContract()} addVoting={addVoting} signer={signer}/>
+        <AddVoting appContract={getAppContract()} signer={signer}/>
         <button className='add-voting-block-refresh-button' onClick={refreshVotings}/>
       </div>
       <div className='votings-container'>

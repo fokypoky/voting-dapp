@@ -5,7 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './add-voting.css';
 
-const AddVoting = ({ appContract, addVoting, signer }) => {
+const AddVoting = ({ appContract, signer }) => {
 	const [votingTitle, setVotingTitle] = useState('');
 
 	const createVoting = async () => {
@@ -22,11 +22,12 @@ const AddVoting = ({ appContract, addVoting, signer }) => {
 		}
 
 		try {
-			await appContract.addVoting(votingTitle);
-			addVoting(votingTitle);
-			toast.info('Подождите пока транзакция добавится в сеть блокчейн', {
-				autoClose: 17000
-			});
+			const transactionResult = await appContract.addVoting(votingTitle);
+			
+			toast.info('Подождите пока транзакция добавится в сеть блокчейн', { duration: 5000});
+
+			await transactionResult.wait();
+			toast.success('Голосование добавлено', { duration: 5000 });
 		} catch (e) {
 			toast.error('Ошибка выполнения транзакции');
 			console.error(e);
